@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -31,12 +32,12 @@ namespace Messages.Api.Helpers
 
             for (var i = 0; i < filtered.Length / 2; i++)
             {
-                // Converting the characters to strings is not the most efficient method,
-                // but it allows comparison using of different cultures: https://stackoverflow.com/a/1394898
                 var leftLetter = filtered[i].ToString();
                 var rightLetter = filtered[filtered.Length - i - 1].ToString();
 
-                if (!string.Equals(leftLetter, rightLetter, StringComparison.InvariantCultureIgnoreCase))
+                // Ignore case and accented letters: https://stackoverflow.com/a/7720903
+                var areEqual = string.Compare(leftLetter, rightLetter, CultureInfo.CurrentCulture, CompareOptions.IgnoreNonSpace | CompareOptions.IgnoreCase) == 0;
+                if (!areEqual)
                 {
                     return false;
                 }
