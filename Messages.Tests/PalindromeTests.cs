@@ -97,6 +97,12 @@ namespace MessagesTests
         [InlineData("All'Unicef non feci nulla")]
         [InlineData("Mon nom")]
         [InlineData("¿Son mulas o cívicos alumnos?")]
+        [InlineData("Eh ! ça va la vache")]
+        [InlineData("Noël a trop par rapport à Léon")]
+        [InlineData("Eine güldne, gute Tugend: Lüge nie!")]
+        [InlineData("O vôo do ovo")]
+        [InlineData("Oi, raro horário!")]
+        [InlineData("Català a l'atac.")]
         public void GivenANonEnglishPalindromeMessage_ItReturnsTrue(string message) => Assert.True(message.IsPalindrome());
 
         [Theory]
