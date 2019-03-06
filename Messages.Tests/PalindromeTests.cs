@@ -1,3 +1,5 @@
+using System;
+using Messages.Api.Helpers;
 using Xunit;
 
 namespace MessagesTests
@@ -5,9 +7,17 @@ namespace MessagesTests
     public class PalindromeTests
     {
         [Fact]
-        public void Test()
+        public void GivenANullString_ThrowsException()
         {
-            Assert.True(1 == 1);
+            string word = null;
+            Assert.Throws<ArgumentNullException>(() => word.IsPalindrome());
+        }
+
+        [Fact]
+        public void GivenAnEmptyString_ThrowsException()
+        {
+            var word = string.Empty;
+            Assert.Throws<ArgumentNullException>(() => word.IsPalindrome());
         }
     }
 }
