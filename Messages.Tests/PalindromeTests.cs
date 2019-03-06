@@ -92,12 +92,19 @@ namespace MessagesTests
         public void GivenAPalindromeMessage_ItReturnsTrue(string message) => Assert.True(message.IsPalindrome());
 
         [Theory]
+        [InlineData("Socorram-me, subi no ônibus em Marrocos")]
+        [InlineData("In girum imus nocte et consumimur igni")]
+        [InlineData("All'Unicef non feci nulla")]
+        [InlineData("Mon nom")]
+        [InlineData("¿Son mulas o cívicos alumnos?")]
+        public void GivenANonEnglishPalindromeMessage_ItReturnsTrue(string message) => Assert.True(message.IsPalindrome());
+
+        [Theory]
         [InlineData("A palindrome is a word, number, sentence, or verse that reads the same backward or forward.")]
         [InlineData("this is not a palindrome")]
         [InlineData("Data has the power to transform business and improve society.")]
         [InlineData("Data should be explored, not just queried.")]
         [InlineData("Data is the new language of business.")]
-        [InlineData("Esta mensagem está escrita em português (PT-BR). Can you read it?")]
         public void GivenANonPalindromeMessage_ItReturnsFalse(string message) => Assert.False(message.IsPalindrome());
     }
 }
