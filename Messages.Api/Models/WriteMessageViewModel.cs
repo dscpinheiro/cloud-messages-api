@@ -6,7 +6,7 @@ namespace Messages.Api.Models
 {
     public class WriteMessageViewModel
     {
-        [Required, JsonProperty("message")]
+        [Required, MaxLength(512), JsonProperty("message")]
         public string Message { get; set; }
     }
 }
