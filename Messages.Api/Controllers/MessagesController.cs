@@ -84,8 +84,7 @@ namespace Messages.Api.Controllers
         }
 
         /// <summary>
-        /// Maps the Message entity (which is saved to the database) to a model returned to
-        /// clients.
+        /// Maps the Message entity (which is saved to the database) to a model returned to clients.
         /// </summary>
         private ReadMessageViewModel CreateReadModel(Message message) => new ReadMessageViewModel
         {

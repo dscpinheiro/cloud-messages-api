@@ -13,11 +13,6 @@ namespace Messages.Api.Services
         {
             new Message
             {
-                Id = Guid.Parse("d59ee506-fbb6-44b0-80b7-fc0114121476"),
-                Value = "Socorram-me, subi no ônibus em Marrocos"
-            },
-            new Message
-            {
                 Id = Guid.Parse("65c97fad-1cd7-49f7-9ca4-fe19d0eded5b"),
                 Value = "Was it a car or a cat I saw?"
             },

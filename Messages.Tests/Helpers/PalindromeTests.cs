@@ -2,7 +2,7 @@ using System;
 using Messages.Api.Helpers;
 using Xunit;
 
-namespace MessagesTests
+namespace MessagesTests.Helpers
 {
     public class PalindromeTests
     {
