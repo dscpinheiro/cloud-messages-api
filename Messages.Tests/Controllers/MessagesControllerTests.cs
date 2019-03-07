@@ -2,6 +2,7 @@ using System;
 using Messages.Api.Controllers;
 using Messages.Api.Models;
 using Messages.Api.Services;
+using MessagesTests.Services;
 
 namespace MessagesTests.Controllers
 {

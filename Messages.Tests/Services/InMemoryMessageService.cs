@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Messages.Api.Helpers;
 using Messages.Api.Models;
+using Messages.Api.Services;
 
-namespace Messages.Api.Services
+namespace MessagesTests.Services
 {
     public class InMemoryMessageService : IMessageService
     {
