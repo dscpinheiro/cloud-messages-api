@@ -13,12 +13,14 @@ RUN dotnet publish --configuration Release --output artifacts
 # Run unit tests
 FROM builder AS testrunner
 WORKDIR /src/Messages.Tests
+
 COPY Messages.Tests/. .
 RUN dotnet build --configuration Release
-ENTRYPOINT ["dotnet", "test"]
+
+ENTRYPOINT ["dotnet", "test", "--logger", "console;verbosity=detailed"]
 
 # Build runtime image
-FROM microsoft/dotnet:2.1-aspnetcore-runtime-alpine
+FROM microsoft/dotnet:2.1-aspnetcore-runtime-alpine AS runtime
 
 # Workaround for the fact that the alpine image does not have any cultures: https://github.com/dotnet/dotnet-docker/issues/533
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT false
