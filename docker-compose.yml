@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  api:
+    build: ./Messages.Api
+    ports:
+      - 5000:80
+    depends_on:
+      - db
+    networks:
+      - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - API_DB_CONNECTION=Host=db;Database=mydatabase;Username=myappuser;Password=mypassword
+
+  db:
+    image: postgres:10-alpine
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - backend
+    environment:
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=myappuser
+      - POSTGRES_PASSWORD=mypassword
+
+networks:
+  backend:
+
+volumes:
+  db-data:

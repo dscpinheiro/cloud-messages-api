@@ -18,29 +18,32 @@ namespace Messages.Api.Services
             _context.Database.Migrate();
         }
 
-        public Task<Message> Add(Message message)
+        public async Task<Message> Add(Message message)
         {
-            throw new NotImplementedException();
+            _context.Messages.Add(message);
+            await _context.SaveChangesAsync();
+
+            return message;
         }
 
-        public Task Delete(Message message)
+        public async Task Delete(Message message)
         {
-            throw new NotImplementedException();
+            _context.Remove(message);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Message>> GetAll()
+        public async Task<IEnumerable<Message>> GetAll()
         {
-            throw new NotImplementedException();
+            var messages = await _context.Messages.ToListAsync();
+            return messages;
         }
 
-        public Task<Message> GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Message> GetById(Guid id) => await _context.Messages.SingleOrDefaultAsync(m => m.Id == id);
 
-        public Task Update(Message message)
+        public async Task Update(Message message)
         {
-            throw new NotImplementedException();
+            _context.Update(message);
+            await _context.SaveChangesAsync();
         }
     }
 }

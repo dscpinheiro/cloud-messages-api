@@ -1,0 +1,9 @@
+**/bin/
+**/obj/
+
+Properties/launchSettings.json
+appsettings.Development.json
+
+*DS_Store
+*.suo
+*.user
