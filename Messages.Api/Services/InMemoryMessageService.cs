@@ -9,7 +9,7 @@ namespace Messages.Api.Services
 {
     public class InMemoryMessageService : IMessageService
     {
-        private static readonly List<Message> _messages = new List<Message>
+        private readonly List<Message> _messages = new List<Message>
         {
             new Message
             {
