@@ -25,7 +25,7 @@ Once the container starts, you should see an output similar to this in the conso
 ```console
 Passed   MessagesTests.Helpers.PalindromeTests.IsPalindrome_PalindromeName_ReturnsTrue(name: "Hannah")
 Passed   MessagesTests.Helpers.PalindromeTests.IsPalindrome_SequenceOfRandomNumbers_ReturnsFalse
-MessagesTests.Helpers.PalindromeTests.IsPalindrome_PalindromeWord_ReturnsTrue(word: "civic")
+Passed   MessagesTests.Helpers.PalindromeTests.IsPalindrome_PalindromeWord_ReturnsTrue(word: "civic")
 
 Total tests: 71. Passed: 71. Failed: 0. Skipped: 0.
 Test Run Successful.
