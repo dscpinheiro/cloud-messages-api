@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Messages.Api.Helpers;
 using Messages.Api.Models;
 using Messages.Api.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Messages.Api.Controllers
@@ -20,6 +21,7 @@ namespace Messages.Api.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<ReadMessageViewModel>>> Get()
         {
             var messages = await _messagesService.GetAll();
@@ -27,6 +29,8 @@ namespace Messages.Api.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ReadMessageViewModel>> Get(Guid id)
         {
             var message = await _messagesService.GetById(id);
@@ -39,6 +43,8 @@ namespace Messages.Api.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post(WriteMessageViewModel model)
         {
             var newMessage = new Message
@@ -53,6 +59,9 @@ namespace Messages.Api.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Put(Guid id, WriteMessageViewModel model)
         {
             var existingMessage = await _messagesService.GetById(id);
@@ -70,6 +79,8 @@ namespace Messages.Api.Controllers
         }
 
         [HttpDelete("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(Guid id)
         {
             var existingMessage = await _messagesService.GetById(id);
