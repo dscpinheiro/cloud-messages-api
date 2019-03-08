@@ -8,6 +8,9 @@ You can build and run the project locally using the following command (assuming 
 docker-compose build && docker-compose up
 ```
 
+> Note: The [Docker Compose file](docker-compose.yml) maps port 5000 on your machine to port 80 in the container. If that port is already in use, you will see an error and have to choose a
+different port.
+
 After the application starts, you should be able to navigate to `http://localhost:5000` in your web browser.
 
 ## Run unit tests:
