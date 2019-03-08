@@ -35,7 +35,7 @@ namespace Messages.Api.Services
         public async Task<IEnumerable<Message>> GetAll(int limit, int offset, string term)
         {
             var query = _context.Messages.AsQueryable();
-            if (!string.IsNullOrEmpty(term))
+            if (!string.IsNullOrWhiteSpace(term))
             {
                 query = query.Where(m => EF.Functions.ILike(m.Value, $"%{term}%"));
             }

@@ -65,7 +65,7 @@ namespace MessagesTests.Services
         public Task<IEnumerable<Message>> GetAll(int limit, int offset, string term)
         {
             var query = _messages.AsEnumerable();
-            if (!string.IsNullOrEmpty(term))
+            if (!string.IsNullOrWhiteSpace(term))
             {
                 // The string class has a .Contains method, but it's case sensitive.
                 // In order to replicate the behavior when talking to a real database,
