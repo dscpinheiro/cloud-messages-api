@@ -22,9 +22,20 @@ namespace Messages.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<ReadMessageViewModel>>> Get()
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<ReadMessageViewModel>>> Get(int limit = 100, int offset = 0, string term = null)
         {
-            var messages = await _messagesService.GetAll();
+            if (limit <= 0)
+            {
+                return BadRequest($"{nameof(limit)} must be greater than zero");
+            }
+
+            if (offset < 0)
+            {
+                return BadRequest($"{nameof(offset)} must be at least zero");
+            }
+
+            var messages = await _messagesService.GetAll(limit, offset, term);
             return messages.Select(CreateReadModel).ToList();
         }
 

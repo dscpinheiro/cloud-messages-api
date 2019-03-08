@@ -8,7 +8,7 @@ namespace MessagesTests.Controllers
     public partial class MessagesControllerTests
     {
         [Fact]
-        public async Task GivenIAddAPalindromeMessage_ItReturnsCreated_AndPalindromePropertyIsTrue()
+        public async Task Add_PalindromeMessage_ReturnsCreatedAndPalindromePropertyIsTrue()
         {
             var actionResult = await _controller.Post(_palindromeMessage);
 
@@ -22,7 +22,7 @@ namespace MessagesTests.Controllers
         }
 
         [Fact]
-        public async Task GivenIAddANonPalindromeMessage_ItReturnsCreated_AndPalindromePropertyIsFalse()
+        public async Task Add_NonPalindromeMessage_ReturnsCreatedAndPalindromePropertyIsFalse()
         {
             var actionResult = await _controller.Post(_nonPalindromeMessage);
 

@@ -32,10 +32,17 @@ namespace Messages.Api.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Message>> GetAll()
+        public async Task<IEnumerable<Message>> GetAll(int limit, int offset, string term)
         {
-            var messages = await _context.Messages.ToListAsync();
-            return messages;
+            var query = _context.Messages.AsQueryable();
+            if (!string.IsNullOrEmpty(term))
+            {
+                query = query.Where(m => EF.Functions.ILike(m.Value, $"%{term}%"));
+            }
+
+            query = query.OrderBy(m => m.Value).Skip(offset).Take(limit);
+
+            return await query.ToListAsync();
         }
 
         public async Task<Message> GetById(Guid id) => await _context.Messages.SingleOrDefaultAsync(m => m.Id == id);

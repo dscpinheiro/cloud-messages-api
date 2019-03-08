@@ -8,7 +8,7 @@ namespace MessagesTests.Controllers
     public partial class MessagesControllerTests
     {
         [Fact]
-        public async Task GivenIDeleteAnExistingMessage_ItReturnsNoContent()
+        public async Task Delete_ExistingMessage_ReturnsNoContent()
         {
             var getActionResult = await _controller.Get();
             var allItems = getActionResult.Value;
@@ -24,7 +24,7 @@ namespace MessagesTests.Controllers
         }
 
         [Fact]
-        public async Task GivenITryDeletingAnUnknownMessage_ItReturnsNotFound()
+        public async Task Delete_UnknownMessage_ReturnsNotFound()
         {
             var actionResult = await _controller.Delete(_nonExistentMessageId);
             Assert.IsType<NotFoundResult>(actionResult);

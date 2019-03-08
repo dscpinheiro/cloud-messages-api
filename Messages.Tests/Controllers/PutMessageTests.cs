@@ -7,7 +7,7 @@ namespace MessagesTests.Controllers
     public partial class MessagesControllerTests
     {
         [Fact]
-        public async Task GivenIUpdateAMessageToBeAPalindrome_ItReturnsNoContent_AndPalindromePropertyIsTrue()
+        public async Task Update_MessageToBeAPalindrome_ReturnsNoContentAndPalindromePropertyIsTrue()
         {
             var getMessageActionResult = await _controller.Get(_existentMessageId);
             var currentMessage = getMessageActionResult.Value;
@@ -25,7 +25,7 @@ namespace MessagesTests.Controllers
         }
 
         [Fact]
-        public async Task GivenITryUpdatingAnUnknownMessage_ItReturnsNotFound()
+        public async Task Update_UnknownMessage_ReturnsNotFound()
         {
             var actionResult = await _controller.Put(_nonExistentMessageId, _palindromeMessage);
             Assert.IsType<NotFoundResult>(actionResult);

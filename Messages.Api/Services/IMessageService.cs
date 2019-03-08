@@ -7,7 +7,7 @@ namespace Messages.Api.Services
 {
     public interface IMessageService
     {
-        Task<IEnumerable<Message>> GetAll();
+        Task<IEnumerable<Message>> GetAll(int limit, int offset, string term);
         Task<Message> GetById(Guid id);
         Task<Message> Add(Message message);
         Task Update(Message message);

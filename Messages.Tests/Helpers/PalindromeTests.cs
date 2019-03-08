@@ -7,14 +7,14 @@ namespace MessagesTests.Helpers
     public class PalindromeTests
     {
         [Fact]
-        public void GivenANullString_ItThrowsException()
+        public void IsPalindrome_NullString_ThrowsException()
         {
             string message = null;
             Assert.Throws<ArgumentNullException>(() => message.IsPalindrome());
         }
 
         [Fact]
-        public void GivenAnEmptyString_ItThrowsException()
+        public void IsPalindrome_EmptyString_ThrowsException()
         {
             var message = string.Empty;
             Assert.Throws<ArgumentNullException>(() => message.IsPalindrome());
@@ -31,7 +31,7 @@ namespace MessagesTests.Helpers
         [InlineData("mom")]
         [InlineData("dad")]
         [InlineData("noon")]
-        public void GivenAPalindromeWord_ItReturnsTrue(string word) => Assert.True(word.IsPalindrome());
+        public void IsPalindrome_PalindromeWord_ReturnsTrue(string word) => Assert.True(word.IsPalindrome());
 
         [Theory]
         [InlineData("Anna")]
@@ -41,31 +41,31 @@ namespace MessagesTests.Helpers
         [InlineData("Otto")]
         [InlineData("Lon Nol")]
         [InlineData("Eevee")]
-        public void GivenAPalindromeName_ItReturnsTrue(string name) => Assert.True(name.IsPalindrome());
+        public void IsPalindrome_PalindromeName_ReturnsTrue(string name) => Assert.True(name.IsPalindrome());
 
         [Fact]
-        public void GivenAOneLetterWord_ItReturnsTrue()
+        public void IsPalindrome_OneLetterWord_ReturnsTrue()
         {
             var word = "x";
             Assert.True(word.IsPalindrome());
         }
 
         [Fact]
-        public void GivenAWordContainingOnlyPunctuation_ItReturnsFalse()
+        public void IsPalindrome_PunctuationOnly_ReturnsFalse()
         {
             var word = "!.,,.!";
             Assert.False(word.IsPalindrome());
         }
 
         [Fact]
-        public void GivenASequenceOfRepeatedNumbers_ItReturnsTrue()
+        public void IsPalindrome_SequenceOfRepeatedNumbers_ReturnsTrue()
         {
             var sequence = "1111111111";
             Assert.True(sequence.IsPalindrome());
         }
 
         [Fact]
-        public void GivenASequenceOfRandomNumbers_ItReturnsFalse()
+        public void IsPalindrome_SequenceOfRandomNumbers_ReturnsFalse()
         {
             var sequence = "865357943037344";
             Assert.False(sequence.IsPalindrome());
@@ -88,7 +88,7 @@ namespace MessagesTests.Helpers
         [InlineData("Dammit, I’m mad!")]
         [InlineData("He did, eh?")]
         [InlineData("I prefer pi")]
-        public void GivenAPalindromeMessage_ItReturnsTrue(string message) => Assert.True(message.IsPalindrome());
+        public void IsPalindrome_EnglishPalindromeMessage_ReturnsTrue(string message) => Assert.True(message.IsPalindrome());
 
         [Theory]
         [InlineData("Socorram-me, subi no ônibus em Marrocos")]
@@ -102,7 +102,7 @@ namespace MessagesTests.Helpers
         [InlineData("O vôo do ovo")]
         [InlineData("Oi, raro horário!")]
         [InlineData("Català a l'atac.")]
-        public void GivenANonEnglishPalindromeMessage_ItReturnsTrue(string message) => Assert.True(message.IsPalindrome());
+        public void IsPalindrome_NonEnglishPalindromeMessage_ReturnsTrue(string message) => Assert.True(message.IsPalindrome());
 
         [Theory]
         [InlineData("A palindrome is a word, number, sentence, or verse that reads the same backward or forward.")]
@@ -110,6 +110,6 @@ namespace MessagesTests.Helpers
         [InlineData("Data has the power to transform business and improve society.")]
         [InlineData("Data should be explored, not just queried.")]
         [InlineData("Data is the new language of business.")]
-        public void GivenANonPalindromeMessage_ItReturnsFalse(string message) => Assert.False(message.IsPalindrome());
+        public void IsPalindrome_NonPalindromeMessage_ReturnsFalse(string message) => Assert.False(message.IsPalindrome());
     }
 }
