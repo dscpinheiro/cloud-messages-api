@@ -60,22 +60,28 @@ namespace MessagesTests.Controllers
             Assert.Equal(allMessages.Count() - 1, filteredMessages.Count());
         }
 
-        [Fact]
-        public async Task Get_MessagesWithInvalidLimit_ReturnsBadRequest()
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(0)]
+        [InlineData(1001)]
+        public async Task Get_MessagesWithInvalidLimit_ReturnsBadRequest(int invalidLimit)
         {
-            var actionResult = await _controller.Get(limit: 0);
+            var actionResult = await _controller.Get(limit: invalidLimit);
 
             Assert.Null(actionResult.Value);
             Assert.IsType<BadRequestObjectResult>(actionResult.Result);
         }
 
-        [Fact]
-        public async Task Get_MessagesWithValidLimit_ReturnsOk()
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(1000)]
+        public async Task Get_MessagesWithValidLimit_ReturnsOk(int validLimit)
         {
-            var actionResult = await _controller.Get(limit: 2);
+            var actionResult = await _controller.Get(limit: validLimit);
             var filteredMessagesCount = actionResult.Value.Count();
 
-            Assert.Equal(2, filteredMessagesCount);
+            Assert.True(filteredMessagesCount <= validLimit);
         }
 
         [Fact]

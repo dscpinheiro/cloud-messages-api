@@ -15,7 +15,7 @@ namespace MessagesTests.Controllers
             var createdResult = actionResult as CreatedAtActionResult;
             Assert.NotNull(createdResult);
 
-            var createdMessage = createdResult.Value as ReadMessageViewModel;
+            var createdMessage = createdResult.Value as ReadMessageResponse;
             Assert.NotNull(createdMessage);
             Assert.True(createdMessage.IsPalindrome);
             Assert.Equal(_palindromeMessage.Message, createdMessage.Message);
@@ -29,7 +29,7 @@ namespace MessagesTests.Controllers
             var createdResult = actionResult as CreatedAtActionResult;
             Assert.NotNull(createdResult);
 
-            var createdMessage = createdResult.Value as ReadMessageViewModel;
+            var createdMessage = createdResult.Value as ReadMessageResponse;
             Assert.NotNull(createdMessage);
             Assert.False(createdMessage.IsPalindrome);
             Assert.Equal(_nonPalindromeMessage.Message, createdMessage.Message);

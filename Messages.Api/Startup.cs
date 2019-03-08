@@ -1,4 +1,7 @@
-﻿using Messages.Api.Models;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using Messages.Api.Models;
 using Messages.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,6 +53,11 @@ namespace Messages.Api
                         Url = "https://github.com/dscpinheiro"
                     }
                 });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

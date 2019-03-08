@@ -20,14 +20,20 @@ namespace Messages.Api.Controllers
             _messagesService = service;
         }
 
+        /// <summary>
+        /// Gets all messages, ordered alphabetically.
+        /// </summary>
+        /// <param name="limit">Number of items to be returned.</param>
+        /// <param name="offset">Number of items to skip. Can be used to paginate results.</param>
+        /// <param name="term">Optional filter. If included, only messages that contain it will be returned.</param>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<IEnumerable<ReadMessageViewModel>>> Get(int limit = 100, int offset = 0, string term = null)
+        public async Task<ActionResult<IEnumerable<ReadMessageResponse>>> Get(int limit = 100, int offset = 0, string term = null)
         {
-            if (limit <= 0)
+            if (limit <= 0 || limit > 1000)
             {
-                return BadRequest($"{nameof(limit)} must be greater than zero");
+                return BadRequest($"{nameof(limit)} must be between 1 and 1000");
             }
 
             if (offset < 0)
@@ -39,10 +45,14 @@ namespace Messages.Api.Controllers
             return messages.Select(CreateReadModel).ToList();
         }
 
+        /// <summary>
+        /// Gets an existing message.
+        /// </summary>
+        /// <param name="id">Id of the message to be retrieved.</param>
         [HttpGet("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ReadMessageViewModel>> Get(Guid id)
+        public async Task<ActionResult<ReadMessageResponse>> Get(Guid id)
         {
             var message = await _messagesService.GetById(id);
             if (message == null)
@@ -53,10 +63,14 @@ namespace Messages.Api.Controllers
             return CreateReadModel(message);
         }
 
+        /// <summary>
+        /// Creates a new message.
+        /// </summary>
+        /// <param name="model">The message to be created.</param>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post(WriteMessageViewModel model)
+        public async Task<IActionResult> Post(WriteMessageRequest model)
         {
             var newMessage = new Message
             {
@@ -69,11 +83,16 @@ namespace Messages.Api.Controllers
             return CreatedAtAction(nameof(Get), new { id = newMessage.Id }, CreateReadModel(newMessage));
         }
 
+        /// <summary>
+        /// Updates an existing message.
+        /// </summary>
+        /// <param name="id">Id of the message to be updated.</param>
+        /// <param name="model">New value of the message.</param>
         [HttpPut("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Put(Guid id, WriteMessageViewModel model)
+        public async Task<IActionResult> Put(Guid id, WriteMessageRequest model)
         {
             var existingMessage = await _messagesService.GetById(id);
             if (existingMessage == null)
@@ -89,6 +108,10 @@ namespace Messages.Api.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Deletes an existing message.
+        /// </summary>
+        /// <param name="id">Id of the message to be deleted.</param>
         [HttpDelete("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -106,9 +129,9 @@ namespace Messages.Api.Controllers
         }
 
         /// <summary>
-        /// Maps the Message entity (which is saved to the database) to a model returned to clients.
+        /// Maps the message entity (which is saved to the database) to a model returned to clients.
         /// </summary>
-        private ReadMessageViewModel CreateReadModel(Message message) => new ReadMessageViewModel
+        private ReadMessageResponse CreateReadModel(Message message) => new ReadMessageResponse
         {
             Id = message.Id,
             Message = message.Value,

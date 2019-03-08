@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Messages.Api.Models
 {
-    public class ReadMessageViewModel
+    public class ReadMessageResponse
     {
         [JsonProperty("id")]
         public Guid Id { get; set; }
