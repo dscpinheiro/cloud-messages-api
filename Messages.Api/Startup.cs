@@ -43,7 +43,12 @@ namespace Messages.Api
                 {
                     Title = "Messages API",
                     Version = "v1",
-                    Contact = new Contact { Name = "Daniel S. Pinheiro", Url = "https://github.com/dscpinheiro" }
+                    Description = "REST API for managing messages",
+                    Contact = new Contact
+                    {
+                        Name = "Daniel S. Pinheiro",
+                        Url = "https://github.com/dscpinheiro"
+                    }
                 });
             });
 
