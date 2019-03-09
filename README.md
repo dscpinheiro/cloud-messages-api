@@ -31,8 +31,9 @@ Total tests: 71. Passed: 71. Failed: 0. Skipped: 0.
 Test Run Successful.
 Test execution time: 4.5200 Seconds
 ```
+--------------
 
-## API Documentation
+## Documentation
 This project uses [Swagger](https://swagger.io/) to generate the API docs, and the Swagger UI is available at the root of the web application. All operations are listed, along with their descriptions, status codes, and required parameters (if any).
 
 ![SwaggerUI](images/swagger.png)
