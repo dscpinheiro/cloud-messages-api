@@ -7,3 +7,6 @@
 *DS_Store
 *.suo
 *.user
+
+.git
+.gitignore
