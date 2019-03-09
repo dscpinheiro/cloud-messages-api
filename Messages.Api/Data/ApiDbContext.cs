@@ -1,6 +1,7 @@
+using Messages.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Messages.Api.Models
+namespace Messages.Api.Data
 {
     public class ApiDbContext : DbContext
     {

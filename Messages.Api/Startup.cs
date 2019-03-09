@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using BeatPulse;
+using Messages.Api.Data;
 using Messages.Api.Models;
 using Messages.Api.Services;
 using Microsoft.AspNetCore.Builder;
@@ -17,12 +18,12 @@ namespace Messages.Api
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        public IHostingEnvironment Environment { get; }
+        public IHostingEnvironment HostingEnvironment { get; }
 
         public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
             Configuration = configuration;
-            Environment = environment;
+            HostingEnvironment = environment;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -68,9 +69,15 @@ namespace Messages.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
-            if (Environment.IsDevelopment())
+            if (HostingEnvironment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<ApiDbContext>();
+                context.Database.Migrate();
             }
 
             app.UseBeatPulse(options =>
@@ -92,7 +99,7 @@ namespace Messages.Api
 
         private string GetConnectionStringValue(string key)
         {
-            var connectionString = System.Environment.GetEnvironmentVariable(key);
+            var connectionString = Environment.GetEnvironmentVariable(key);
             if (string.IsNullOrWhiteSpace(connectionString))
             {
                 connectionString = Configuration.GetConnectionString(key);

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Messages.Api.Migrations
+namespace Messages.Api.Data.Migrations
 {
     public partial class InitialCreate : Migration
     {

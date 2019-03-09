@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Messages.Api.Helpers;
+using Messages.Api.Data;
 using Messages.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,12 +11,7 @@ namespace Messages.Api.Services
     public class MessageService : IMessageService
     {
         private readonly ApiDbContext _context;
-
-        public MessageService(ApiDbContext context)
-        {
-            _context = context;
-            _context.Database.Migrate();
-        }
+        public MessageService(ApiDbContext context) => _context = context;
 
         public async Task<Message> Add(Message message)
         {
