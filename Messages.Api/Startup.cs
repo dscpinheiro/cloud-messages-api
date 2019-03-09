@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using BeatPulse;
 using Messages.Api.Models;
 using Messages.Api.Services;
 using Microsoft.AspNetCore.Builder;
@@ -27,7 +28,6 @@ namespace Messages.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
 
             var connectionString = GetConnectionStringValue("API_DB_CONNECTION");
 
@@ -38,7 +38,7 @@ namespace Messages.Api
                     options.UseNpgsql(connectionString, npgsqlOptions => npgsqlOptions.EnableRetryOnFailure());
                 });
 
-            services.AddScoped<IMessageService, MessageService>();
+            services.AddBeatPulse(options => options.AddNpgSql(connectionString));
 
             services.AddSwaggerGen(options =>
             {
@@ -60,6 +60,9 @@ namespace Messages.Api
                 options.IncludeXmlComments(xmlPath);
             });
 
+            services.AddScoped<IMessageService, MessageService>();
+
+            services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -71,7 +74,10 @@ namespace Messages.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(b => b.AllowAnyMethod().AllowAnyHeader().WithOrigins(Configuration["AllowedHosts"]));
+            app.UseBeatPulse(options => {
+                options.ConfigurePath("hc");
+                options.ConfigureDetailedOutput(detailedOutput: true);
+            });
 
             app.UseSwagger();
             app.UseSwaggerUI(options =>
@@ -80,6 +86,7 @@ namespace Messages.Api
                 options.RoutePrefix = string.Empty;
             });
 
+            app.UseCors(b => b.AllowAnyMethod().AllowAnyHeader().WithOrigins(Configuration["AllowedHosts"]));
             app.UseMvc();
         }
 
