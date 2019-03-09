@@ -33,6 +33,6 @@ Test execution time: 4.5200 Seconds
 ```
 
 ## API Documentation
-This project uses [Swagger](https://swagger.io/) to generate the API docs, and the Swagger UI is available at the root of the web application. All operations are listed, along with their status codes and required parameters (if any).
+This project uses [Swagger](https://swagger.io/) to generate the API docs, and the Swagger UI is available at the root of the web application. All operations are listed, along with their descriptions, status codes, and required parameters (if any).
 
 ![SwaggerUI](images/swagger.png)
