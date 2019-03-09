@@ -28,7 +28,6 @@ namespace Messages.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             var connectionString = GetConnectionStringValue("API_DB_CONNECTION");
 
             services
@@ -74,7 +73,8 @@ namespace Messages.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseBeatPulse(options => {
+            app.UseBeatPulse(options =>
+            {
                 options.ConfigurePath("hc");
                 options.ConfigureDetailedOutput(detailedOutput: true);
             });
