@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Messages.Api.Controllers
 {
-    [Route("messages"), ApiController]
+    [Route("api/messages"), ApiController]
     public class MessagesController : ControllerBase
     {
         private readonly IMessageService _messagesService;
