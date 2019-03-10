@@ -1,0 +1,8 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Test started on `date`
+      - cd $CODEBUILD_SRC_DIR/Messages.Tests && dotnet test --configuration Release
+      - echo Test completed on `date`

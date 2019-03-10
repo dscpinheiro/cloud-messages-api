@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - $(aws ecr get-login --no-include-email --region $AWS_REGION)
+      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_REPO_NAME
+      - CUSTOM_TAG=$(date +%Y-%m-%d_%H-%M-%S)
+      - COMMIT_ID=${CODEBUILD_RESOLVED_SOURCE_VERSION:0:8}
+  build:
+    commands:
+      - docker build --target runtime -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$CUSTOM_TAG
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:ref-$COMMIT_ID
+  post_build:
+    commands:
+      - docker push $REPOSITORY_URI
+      - cd $CODEBUILD_SRC_DIR && printf '[{"name":"messages-api-container","imageUri":"%s"}]' $REPOSITORY_URI:$CUSTOM_TAG > imagedefinitions.json
+artifacts:
+  files:
+    - imagedefinitions.json
