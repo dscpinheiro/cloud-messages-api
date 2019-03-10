@@ -20,27 +20,32 @@ namespace MessagesTests.Controllers
             new Message
             {
                 Id = Guid.Parse("65c97fad-1cd7-49f7-9ca4-fe19d0eded5b"),
-                Value = "Was it a car or a cat I saw?"
+                Value = "Was it a car or a cat I saw?",
+                IsPalindrome = true
             },
             new Message
             {
                 Id = Guid.Parse("9eca944a-4f75-4b15-b738-d2a2e0573bfe"),
-                Value = "this is not a palindrome"
+                Value = "this is not a palindrome",
+                IsPalindrome = false
             },
             new Message
             {
                 Id = Guid.Parse("118d9937-46c5-4d9c-b027-43840be00224"),
-                Value = "Norma is as selfless as I am, Ron."
+                Value = "Norma is as selfless as I am, Ron.",
+                IsPalindrome = true
             },
             new Message
             {
                 Id = Guid.Parse("4e153648-db6e-4d37-a322-388177f20b0b"),
-                Value = "Data is the new language of business"
+                Value = "Data is the new language of business",
+                IsPalindrome = false
             },
             new Message
             {
                 Id = Guid.Parse("e32959df-eb7b-4eaf-9dc5-7b0757f8badc"),
-                Value = "Data should be explored, not just queried."
+                Value = "Data should be explored, not just queried.",
+                IsPalindrome = false
             }
         };
 
@@ -60,13 +65,7 @@ namespace MessagesTests.Controllers
         public MessagesControllerTests()
         {
             _context = new ApiDbContext(CreateInMemoryOptions());
-
-            foreach (var message in _sampleMessages)
-            {
-                message.IsPalindrome = message.Value.IsPalindrome();
-                _context.Messages.Add(message);
-            }
-
+            _context.AddRange(_sampleMessages);
             _context.SaveChanges();
 
             var messagesService = new MessageService(_context);
@@ -79,11 +78,10 @@ namespace MessagesTests.Controllers
                 .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();
 
-            var builder = new DbContextOptionsBuilder<ApiDbContext>()
+            return new DbContextOptionsBuilder<ApiDbContext>()
                 .UseInMemoryDatabase(databaseName: "UnitTestsDatabase")
-                .UseInternalServiceProvider(serviceProvider);
-
-            return builder.Options;
+                .UseInternalServiceProvider(serviceProvider)
+                .Options;
         }
 
         public void Dispose()
