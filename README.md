@@ -16,7 +16,7 @@ different port.
 After the application starts, you should be able to navigate to `http://localhost:5000` in your web browser and invoke the API via cURL.
 
 ```console
-curl -X GET "http://localhost:5000/messages" --verbose --include
+curl -X GET "http://localhost:5000/api/messages" --verbose --include
 ```
 
 ## Run unit tests:
