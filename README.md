@@ -1,8 +1,6 @@
 # Messages REST API
 This a sample project which manages messages and provides details about those messages, specifically whether or not a message is a palindrome. It supports the following operations: create, retrieve, update, and delete a single message, as well as listing all messages.
 
-![Build Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiVXEvUGUrZWZ6aUFhTmF3Q3pVTHM5aGt0RWRhQ3Zhem5aQmpiM1VnLzhhZkFzVGZ0RUlaYjM0cVZuSTl5TllMbUZWSVBDVk00NjUzeWRvYnY1SlN4ZDU0PSIsIml2UGFyYW1ldGVyU3BlYyI6IkVnS09WRzVoOWMwdStSa2kiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
-
 ## Run API:
 You can build and run the project locally using the following command (assuming that you are in the root folder of the repository)
 
