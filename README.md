@@ -45,4 +45,4 @@ This project uses [Swagger](https://swagger.io/) to generate the API docs, and t
 ![SwaggerUI](images/swagger.png)
 
 ## Project structure
-TODO: add image of project structure
+![Project structure](images/project.png)
