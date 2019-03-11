@@ -44,3 +44,10 @@ This project uses [Swagger](https://swagger.io/) to generate the API docs, and t
 
 ## Project structure
 ![Project structure](images/project.png)
+
+The project also leverages [CodeBuild](https://aws.amazon.com/codebuild/) and [CodePipeline](https://aws.amazon.com/codepipeline/) to guarantee that, every time a change is pushed to the master branch, the following happens:
+1. [Unit tests are run](codebuild/buildspec.test.yml)
+2. [New Docker image is built](codebuild/buildspec.ecr.yml)
+3. Image is pushed to a registry (which in this solution is [ECR](https://aws.amazon.com/ecr/))
+
+![CodePipeline](images/codepipeline.png)
