@@ -29,13 +29,16 @@ namespace Messages.Api.Helpers
                 return false;
             }
 
+            // Ignore case and accented letters: https://stackoverflow.com/a/7720903
+            var culture = CultureInfo.CurrentCulture;
+            var compareOptions = CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace;
+
             for (var i = 0; i < filtered.Length / 2; i++)
             {
                 var leftLetter = filtered[i].ToString();
                 var rightLetter = filtered[filtered.Length - i - 1].ToString();
 
-                // Ignore case and accented letters: https://stackoverflow.com/a/7720903
-                var areEqual = string.Compare(leftLetter, rightLetter, CultureInfo.CurrentCulture, CompareOptions.IgnoreNonSpace | CompareOptions.IgnoreCase) == 0;
+                var areEqual = string.Compare(leftLetter, rightLetter, culture, compareOptions) == 0;
                 if (!areEqual)
                 {
                     return false;
