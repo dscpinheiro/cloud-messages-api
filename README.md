@@ -50,4 +50,6 @@ The project also leverages [CodeBuild](https://aws.amazon.com/codebuild/) and [C
 2. [New Docker image is built](codebuild/buildspec.ecr.yml)
 3. Image is pushed to a registry (which in this solution is [ECR](https://aws.amazon.com/ecr/))
 
-![CodePipeline](images/codepipeline.png)
+![Pipeline](images/pipeline.png)
+
+![CodePipelineConsole](images/console.png)
