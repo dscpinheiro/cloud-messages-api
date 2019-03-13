@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Messages.Api.Controllers;
 using Messages.Api.Data;
-using Messages.Api.Helpers;
 using Messages.Api.Models;
 using Messages.Api.Services;
 using Microsoft.EntityFrameworkCore;

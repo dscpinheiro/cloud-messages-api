@@ -3,7 +3,6 @@ using System.IO;
 using System.Reflection;
 using BeatPulse;
 using Messages.Api.Data;
-using Messages.Api.Models;
 using Messages.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
