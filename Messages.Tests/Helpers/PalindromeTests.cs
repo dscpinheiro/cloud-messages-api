@@ -6,41 +6,40 @@ namespace MessagesTests.Helpers
 {
     public class PalindromeTests
     {
-        [Fact]
-        public void IsPalindrome_NullString_ThrowsException()
-        {
-            string message = null;
-            Assert.Throws<ArgumentNullException>(() => message.IsPalindrome());
-        }
-
-        [Fact]
-        public void IsPalindrome_EmptyString_ThrowsException()
-        {
-            var message = string.Empty;
-            Assert.Throws<ArgumentNullException>(() => message.IsPalindrome());
-        }
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        public void IsPalindrome_InvalidParameter_ThrowsException(string message) => Assert.Throws<ArgumentNullException>(() => message.IsPalindrome());
 
         [Theory]
         [InlineData("madam")]
         [InlineData("racecar")]
-        [InlineData("arara")]
         [InlineData("civic")]
         [InlineData("kayak")]
         [InlineData("radar")]
         [InlineData("level")]
         [InlineData("mom")]
         [InlineData("dad")]
-        [InlineData("noon")]
+        [InlineData("été")]
+        [InlineData("ici")]
+        [InlineData("tôt")]
+        [InlineData("rêver")]
+        [InlineData("arara")]
+        [InlineData("reviver")]
+        [InlineData("omissíssimo")]
+        [InlineData("saippuakivikauppias")]
         public void IsPalindrome_PalindromeWord_ReturnsTrue(string word) => Assert.True(word.IsPalindrome());
 
         [Theory]
+        [InlineData("Ana")]
         [InlineData("Anna")]
         [InlineData("Hanah")]
         [InlineData("Hannah")]
         [InlineData("Bob")]
         [InlineData("Otto")]
         [InlineData("Lon Nol")]
-        [InlineData("Eevee")]
+        [InlineData("Natan")]
+        [InlineData("Laval")]
         public void IsPalindrome_PalindromeName_ReturnsTrue(string name) => Assert.True(name.IsPalindrome());
 
         [Fact]
@@ -57,19 +56,17 @@ namespace MessagesTests.Helpers
             Assert.False(word.IsPalindrome());
         }
 
-        [Fact]
-        public void IsPalindrome_SequenceOfRepeatedNumbers_ReturnsTrue()
-        {
-            var sequence = "1111111111";
-            Assert.True(sequence.IsPalindrome());
-        }
+        [Theory]
+        [InlineData("11111")]
+        [InlineData("22")]
+        [InlineData("9999999999999999999")]
+        public void IsPalindrome_SequenceOfRepeatedNumbers_ReturnsTrue(string sequence) => Assert.True(sequence.IsPalindrome());
 
-        [Fact]
-        public void IsPalindrome_SequenceOfRandomNumbers_ReturnsFalse()
-        {
-            var sequence = "865357943037344";
-            Assert.False(sequence.IsPalindrome());
-        }
+        [Theory]
+        [InlineData("865357943037344")]
+        [InlineData("865368")]
+        [InlineData("12201")]
+        public void IsPalindrome_SequenceOfRandomNumbers_ReturnsFalse(string sequence) => Assert.False(sequence.IsPalindrome());
 
         [Theory]
         [InlineData("A man, a plan, a canal, Panama!")]
@@ -77,6 +74,7 @@ namespace MessagesTests.Helpers
         [InlineData("No 'x' in Nixon")]
         [InlineData("Live on time, emit no evil")]
         [InlineData("Madam, I'm Adam.")]
+        [InlineData("Madam, in Eden I'm Adam.")]
         [InlineData("Some men interpret nine memos.")]
         [InlineData("Do geese see God?")]
         [InlineData("Too bad--I hid a boot.")]
@@ -88,6 +86,9 @@ namespace MessagesTests.Helpers
         [InlineData("Dammit, I’m mad!")]
         [InlineData("He did, eh?")]
         [InlineData("I prefer pi")]
+        [InlineData("Nurses run")]
+        [InlineData("'Nurses run', says sick Cissy as nurses run")]
+        [InlineData("Did Hannah see bees? Hannah did...")]
         public void IsPalindrome_EnglishPalindromeMessage_ReturnsTrue(string message) => Assert.True(message.IsPalindrome());
 
         [Theory]
@@ -98,10 +99,18 @@ namespace MessagesTests.Helpers
         [InlineData("¿Son mulas o cívicos alumnos?")]
         [InlineData("Eh ! ça va la vache")]
         [InlineData("Noël a trop par rapport à Léon")]
+        [InlineData("La mariée ira mal")]
         [InlineData("Eine güldne, gute Tugend: Lüge nie!")]
         [InlineData("O vôo do ovo")]
         [InlineData("Oi, raro horário!")]
         [InlineData("Català a l'atac.")]
+        [InlineData("Dábale arroz a la zorra el abad")]
+        [InlineData("Isä, älä myy myymälääsi.")]
+        [InlineData("Te pék, láttál képet?")]
+        [InlineData("Ogni mare è ramingo")]
+        [InlineData("Tien, Alícia sap mès sèm pas aicí la neit.")]
+        [InlineData("Roma, lo còr nud d’un ròc, o l’amor.")]
+        [InlineData("Luza Rocelina, a namorada do Manuel, leu na 'Moda da Romana': anil é cor azul")]
         public void IsPalindrome_NonEnglishPalindromeMessage_ReturnsTrue(string message) => Assert.True(message.IsPalindrome());
 
         [Theory]
