@@ -6,7 +6,7 @@ phases:
       - $(aws ecr get-login --no-include-email --region $AWS_REGION)
       - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_REPO_NAME
       - CUSTOM_TAG=$(date +%Y-%m-%d_%H-%M-%S)
-      - COMMIT_ID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 7)
+      - COMMIT_ID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)
   build:
     commands:
       - docker build --target runtime -t $REPOSITORY_URI:latest .
