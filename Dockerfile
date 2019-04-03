@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.1.505-alpine AS builder
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2.105-alpine AS builder
 
 # Restore packages and publish artifacts
 WORKDIR /src
@@ -20,7 +20,7 @@ RUN dotnet build --configuration Release
 ENTRYPOINT ["dotnet", "test", "--logger", "console;verbosity=detailed"]
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.1.9-alpine AS runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.3-alpine AS runtime
 
 # Workaround for the fact that the alpine image does not have any cultures: https://github.com/dotnet/dotnet-docker/issues/533
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT false
