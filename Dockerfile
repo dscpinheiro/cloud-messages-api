@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2.203-alpine AS builder
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2-alpine AS builder
 
 # Restore packages and publish artifacts
 WORKDIR /src
