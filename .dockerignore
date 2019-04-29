@@ -1,5 +1,6 @@
 **/bin/
 **/obj/
+**/codebuild/
 
 **/.vs/
 **/.vscode/
@@ -13,3 +14,5 @@
 
 *Dockerfile*
 *docker-compose*
+
+README.md
