@@ -1,12 +1,12 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-alpine AS builder
-
-# Restore packages and publish artifacts
 WORKDIR /src
-COPY Messages.Api/*.csproj ./Messages.Api/
 
+# Copy csproj and restore as distinct layers
+COPY Messages.Api/*.csproj ./Messages.Api/
 WORKDIR /src/Messages.Api
 RUN dotnet restore
 
+# Copy everything else and publish artifacts
 COPY Messages.Api/. .
 RUN dotnet publish --configuration Release --output artifacts
 
