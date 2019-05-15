@@ -105,7 +105,7 @@ namespace MessagesTests.Controllers
         [Fact]
         public async Task Get_MessagesWithDifferentCaseTerm_ReturnsOk()
         {
-            var actionResult = await _controller.Get(term: "data");
+            var actionResult = await _controller.Get(term: "pAlINdroMe");
             var filteredMessages = actionResult.Value;
 
             Assert.NotEmpty(filteredMessages);
