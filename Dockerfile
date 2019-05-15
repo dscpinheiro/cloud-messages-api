@@ -20,7 +20,7 @@ RUN dotnet build --configuration Release
 ENTRYPOINT ["dotnet", "test", "--logger", "console;verbosity=detailed"]
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.4-alpine AS runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2.5-alpine AS runtime
 WORKDIR /app
 
 # Workaround for the fact that the alpine image does not have any cultures: https://github.com/dotnet/dotnet-docker/issues/533
