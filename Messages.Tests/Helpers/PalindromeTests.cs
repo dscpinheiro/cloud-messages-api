@@ -116,9 +116,6 @@ namespace MessagesTests.Helpers
         [Theory]
         [InlineData("A palindrome is a word, number, sentence, or verse that reads the same backward or forward.")]
         [InlineData("this is not a palindrome")]
-        [InlineData("Data has the power to transform business and improve society.")]
-        [InlineData("Data should be explored, not just queried.")]
-        [InlineData("Data is the new language of business.")]
         public void IsPalindrome_NonPalindromeMessage_ReturnsFalse(string message) => Assert.False(message.IsPalindrome());
     }
 }
