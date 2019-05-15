@@ -29,5 +29,12 @@ RUN apk add --no-cache icu-libs
 ENV LC_ALL en_CA.UTF-8
 ENV LANG en_CA.UTF-8
 
-COPY --from=builder /src/Messages.Api/artifacts .
+# Create user for API
+RUN addgroup -S apigroup && adduser -S apiuser -G apigroup
+USER apiuser
+
+# Copy artifacts and change permissions
+COPY --from=builder --chown=apiuser:apigroup /src/Messages.Api/artifacts .
+
+EXPOSE 8080
 ENTRYPOINT ["dotnet", "Messages.Api.dll"]
