@@ -33,18 +33,6 @@ namespace MessagesTests.Controllers
                 Id = Guid.Parse("118d9937-46c5-4d9c-b027-43840be00224"),
                 Value = "Norma is as selfless as I am, Ron.",
                 IsPalindrome = true
-            },
-            new Message
-            {
-                Id = Guid.Parse("4e153648-db6e-4d37-a322-388177f20b0b"),
-                Value = "Data is the new language of business",
-                IsPalindrome = false
-            },
-            new Message
-            {
-                Id = Guid.Parse("e32959df-eb7b-4eaf-9dc5-7b0757f8badc"),
-                Value = "Data should be explored, not just queried.",
-                IsPalindrome = false
             }
         };
 
