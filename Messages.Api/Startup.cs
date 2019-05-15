@@ -73,12 +73,6 @@ namespace Messages.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetService<ApiDbContext>();
-                context.Database.Migrate();
-            }
-
             app.UseBeatPulse(options =>
             {
                 options.ConfigurePath("hc");
