@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using BeatPulse;
 using Messages.Api.Data;
+using Messages.Api.Filters;
 using Messages.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,7 +26,6 @@ namespace Messages.Api
             HostingEnvironment = environment;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = GetConnectionStringValue("API_DB_CONNECTION");
@@ -41,22 +41,13 @@ namespace Messages.Api
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info
-                {
-                    Title = "Messages API",
-                    Version = "v1",
-                    Description = "REST API for managing messages",
-                    Contact = new Contact
-                    {
-                        Name = "Daniel S. Pinheiro",
-                        Url = "https://github.com/dscpinheiro"
-                    }
-                });
+                options.SwaggerDoc("v1", new Info { Title = "Messages API", Version = "v1" });
 
-                // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
+
+                options.DocumentFilter<RemoveModelsFilter>();
             });
 
             services.AddScoped<IMessageService, MessageService>();
@@ -65,7 +56,6 @@ namespace Messages.Api
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
             if (HostingEnvironment.IsDevelopment())
