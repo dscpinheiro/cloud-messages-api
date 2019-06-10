@@ -6,6 +6,7 @@ using Xunit;
 
 namespace MessagesTests.Validation
 {
+    [Trait("Category", "Integration")]
     public class ValidationTests : IClassFixture<ValidationFixture>
     {
         private readonly ValidationFixture _fixture;

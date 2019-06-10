@@ -5,6 +5,7 @@ using Xunit;
 
 namespace MessagesTests.Controllers
 {
+    [Trait("Category", "Unit")]
     public partial class MessagesControllerTests
     {
         [Fact]

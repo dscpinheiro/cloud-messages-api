@@ -4,6 +4,7 @@ using Xunit;
 
 namespace MessagesTests.Helpers
 {
+    [Trait("Category", "Unit")]
     public class PalindromeTests
     {
         [Theory]
