@@ -1,12 +1,21 @@
 version: 0.2
 
+env:
+  variables:
+    BUILD_CONFIG: Release
+
 phases:
   install:
     runtime-versions:
-      docker: 18
+      dotnet: 2.2
+  pre_build:
+    commands:
+      - echo Test started on `date`
+      - dotnet restore
   build:
     commands:
-      - docker build --target testrunner -t unittests .
-      - docker run --name testrunner unittests
-      - EXIT_CODE=$(docker inspect testrunner --format='{{.State.ExitCode}}')
-      - exit $EXIT_CODE
+      - dotnet build -c $BUILD_CONFIG
+      - dotnet test -c $BUILD_CONFIG
+  post_build:
+    commands:
+      - echo Test completed on `date`
