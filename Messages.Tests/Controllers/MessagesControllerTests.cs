@@ -1,13 +1,13 @@
-using System;
-using System.Collections.Generic;
-using Messages.Api.Controllers;
+﻿using Messages.Api.Controllers;
 using Messages.Api.Data;
 using Messages.Api.Models;
 using Messages.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
 
-namespace MessagesTests.Controllers
+namespace Messages.Tests.Controllers
 {
     public partial class MessagesControllerTests : IDisposable
     {
@@ -66,14 +66,11 @@ namespace MessagesTests.Controllers
                 .BuildServiceProvider();
 
             return new DbContextOptionsBuilder<ApiDbContext>()
-                .UseInMemoryDatabase(databaseName: "UnitTestsDatabase")
+                .UseInMemoryDatabase(databaseName: "UnitTestsDB")
                 .UseInternalServiceProvider(serviceProvider)
                 .Options;
         }
 
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
+        public void Dispose() => _context.Dispose();
     }
 }

@@ -21,19 +21,21 @@ curl -X GET "http://localhost:5000/api/messages" --verbose --include
 To execute the unit tests locally, run the following commands from the root folder.
 
 ```console
-docker build --target testrunner -t cloud-aud-messages:unittests .
-docker run --rm cloud-aud-messages:unittests
+dotnet test --logger 'console;verbosity=detailed'
 ```
 Once the container starts, you should see an output similar to this in the console.
 
 ```console
-Passed   MessagesTests.Helpers.PalindromeTests.IsPalindrome_PalindromeName_ReturnsTrue(name: "Hannah")
-Passed   MessagesTests.Helpers.PalindromeTests.IsPalindrome_SequenceOfRandomNumbers_ReturnsFalse
-Passed   MessagesTests.Helpers.PalindromeTests.IsPalindrome_PalindromeWord_ReturnsTrue(word: "civic")
+√ Messages.Tests.Controllers.MessagesControllerTests.Update_UnknownMessage_ReturnsNotFound [9ms]
+√ Messages.Tests.Controllers.MessagesControllerTests.Update_MessageToBeAPalindrome_ReturnsNoContentAndPalindromePropertyIsTrue [11ms]
+√ Messages.Tests.Controllers.MessagesControllerTests.Delete_ExistingMessage_ReturnsNoContent [17ms]
+√ Messages.Tests.Controllers.MessagesControllerTests.Add_PalindromeMessage_ReturnsCreatedAndPalindromePropertyIsTrue [5ms]
+√ Messages.Tests.Controllers.MessagesControllerTests.Get_MessagesWithUnknownSearchTerm_ReturnsNoItems [9ms]
 
-Total tests: 71. Passed: 71. Failed: 0. Skipped: 0.
 Test Run Successful.
-Test execution time: 4.5200 Seconds
+Total tests: 102
+     Passed: 102
+Total time: 1.7048 Seconds
 ```
 --------------
 
@@ -41,10 +43,3 @@ Test execution time: 4.5200 Seconds
 This project uses [Swagger](https://swagger.io/) to generate the API docs, and the Swagger UI is available at the root of the web application. All operations are listed, along with their descriptions, status codes, and required parameters (if any).
 
 ![SwaggerUI](images/swagger.png)
-
-The project also leverages [CodeBuild](https://aws.amazon.com/codebuild/) and [CodePipeline](https://aws.amazon.com/codepipeline/) to guarantee that, every time a change is pushed to the master branch, the following happens:
-1. [Unit tests are run](codebuild/buildspec.test.yml)
-2. [New Docker image is built](codebuild/buildspec.ecr.yml)
-3. Image is pushed to a registry (which in this solution is [ECR](https://aws.amazon.com/ecr/))
-
-![Pipeline](images/pipeline.png)

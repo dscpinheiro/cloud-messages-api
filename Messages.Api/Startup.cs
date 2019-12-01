@@ -1,26 +1,25 @@
-using System;
-using System.IO;
-using System.Reflection;
-using BeatPulse;
 using Messages.Api.Data;
 using Messages.Api.Filters;
 using Messages.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Messages.Api
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        public IHostingEnvironment HostingEnvironment { get; }
+        public IWebHostEnvironment HostingEnvironment { get; }
 
-        public Startup(IConfiguration configuration, IHostingEnvironment environment)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
             HostingEnvironment = environment;
@@ -29,19 +28,28 @@ namespace Messages.Api
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = GetConnectionStringValue("API_DB_CONNECTION");
+            if (!HostingEnvironment.IsProduction() && string.IsNullOrWhiteSpace(connectionString))
+            {
+                services.AddDbContext<ApiDbContext>(options => options.UseInMemoryDatabase("InMemoryDB"));
+            }
+            else
+            {
+                services
+                    .AddEntityFrameworkNpgsql()
+                    .AddDbContext<ApiDbContext>(options =>
+                    {
+                        options.UseNpgsql(connectionString, npgsqlOptions => npgsqlOptions.EnableRetryOnFailure());
+                    });
+            }
 
-            services
-                .AddEntityFrameworkNpgsql()
-                .AddDbContext<ApiDbContext>(options =>
-                {
-                    options.UseNpgsql(connectionString, npgsqlOptions => npgsqlOptions.EnableRetryOnFailure());
-                });
-
-            services.AddBeatPulse(options => options.AddNpgSql(connectionString));
+            services.AddHealthChecks().AddDbContextCheck<ApiDbContext>();
+            services.AddScoped<IMessageService, MessageService>();
+            services.AddCors();
+            services.AddControllers();
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info { Title = "Messages API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Messages API", Version = "v1" });
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -49,11 +57,6 @@ namespace Messages.Api
 
                 options.DocumentFilter<RemoveModelsFilter>();
             });
-
-            services.AddScoped<IMessageService, MessageService>();
-
-            services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         public void Configure(IApplicationBuilder app)
@@ -63,12 +66,6 @@ namespace Messages.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseBeatPulse(options =>
-            {
-                options.ConfigurePath("hc");
-                options.ConfigureDetailedOutput(detailedOutput: true);
-            });
-
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
@@ -76,8 +73,15 @@ namespace Messages.Api
                 options.RoutePrefix = string.Empty;
             });
 
+            app.UseRouting();
+            app.UseAuthorization();
             app.UseCors(b => b.AllowAnyMethod().AllowAnyHeader().WithOrigins(Configuration["AllowedHosts"]));
-            app.UseMvc();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHealthChecks("/hc");
+                endpoints.MapControllers();
+            });
         }
 
         private string GetConnectionStringValue(string key)

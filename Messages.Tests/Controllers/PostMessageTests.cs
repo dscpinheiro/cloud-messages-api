@@ -1,9 +1,9 @@
-using System.Threading.Tasks;
-using Messages.Api.Models;
+﻿using Messages.Api.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Xunit;
 
-namespace MessagesTests.Controllers
+namespace Messages.Tests.Controllers
 {
     [Trait("Category", "Unit")]
     public partial class MessagesControllerTests

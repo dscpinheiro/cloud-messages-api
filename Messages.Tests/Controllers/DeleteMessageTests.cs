@@ -1,9 +1,9 @@
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Xunit;
 
-namespace MessagesTests.Controllers
+namespace Messages.Tests.Controllers
 {
     [Trait("Category", "Unit")]
     public partial class MessagesControllerTests

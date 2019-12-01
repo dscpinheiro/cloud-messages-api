@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Messages.Api.Helpers;
+﻿using Messages.Api.Helpers;
 using Messages.Api.Models;
 using Messages.Api.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Messages.Api.Controllers
 {
@@ -15,10 +15,7 @@ namespace Messages.Api.Controllers
     {
         private readonly IMessageService _messagesService;
 
-        public MessagesController(IMessageService service)
-        {
-            _messagesService = service;
-        }
+        public MessagesController(IMessageService service) => _messagesService = service;
 
         /// <summary>
         /// Gets all messages, ordered alphabetically.
@@ -79,7 +76,6 @@ namespace Messages.Api.Controllers
             };
 
             newMessage = await _messagesService.Add(newMessage);
-
             return CreatedAtAction(nameof(Get), new { id = newMessage.Id }, CreateReadModel(newMessage));
         }
 
@@ -104,7 +100,6 @@ namespace Messages.Api.Controllers
             existingMessage.IsPalindrome = model.Message.IsPalindrome();
 
             await _messagesService.Update(existingMessage);
-
             return NoContent();
         }
 
@@ -124,7 +119,6 @@ namespace Messages.Api.Controllers
             }
 
             await _messagesService.Delete(existingMessage);
-
             return NoContent();
         }
 

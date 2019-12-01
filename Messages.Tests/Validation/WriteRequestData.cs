@@ -1,6 +1,6 @@
-using Xunit;
+﻿using Xunit;
 
-namespace MessagesTests.Validation
+namespace Messages.Tests.Validation
 {
     public class InvalidWriteRequestData : TheoryData<string>
     {

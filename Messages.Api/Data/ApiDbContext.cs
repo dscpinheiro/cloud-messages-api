@@ -1,4 +1,4 @@
-using Messages.Api.Models;
+﻿using Messages.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Messages.Api.Data
