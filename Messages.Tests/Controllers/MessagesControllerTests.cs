@@ -4,6 +4,7 @@ using Messages.Api.Models;
 using Messages.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 
@@ -56,7 +57,7 @@ namespace Messages.Tests.Controllers
             _context.SaveChanges();
 
             var messagesService = new MessageService(_context);
-            _controller = new MessagesController(messagesService);
+            _controller = new MessagesController(messagesService, NullLogger<MessagesController>.Instance);
         }
 
         private static DbContextOptions<ApiDbContext> CreateInMemoryOptions()
