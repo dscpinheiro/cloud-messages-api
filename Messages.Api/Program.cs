@@ -1,9 +1,8 @@
-﻿using System.Threading.Tasks;
 using Messages.Api.Data;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Messages.Api
 {
@@ -11,7 +10,7 @@ namespace Messages.Api
     {
         public static void Main(string[] args)
         {
-            var webHost = CreateWebHostBuilder(args).Build();
+            var webHost = CreateHostBuilder(args).Build();
 
             using (var scope = webHost.Services.CreateScope())
             {
@@ -22,10 +21,12 @@ namespace Messages.Api
             webHost.Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost
-                .CreateDefaultBuilder(args)
-                .UseUrls("http://*:8080")
-                .UseStartup<Startup>();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseUrls("http://*:8080");
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }

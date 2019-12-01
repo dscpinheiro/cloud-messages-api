@@ -1,8 +1,8 @@
+﻿using Messages.Api.Helpers;
 using System;
-using Messages.Api.Helpers;
 using Xunit;
 
-namespace MessagesTests.Helpers
+namespace Messages.Tests.Helpers
 {
     [Trait("Category", "Unit")]
     public class PalindromeTests

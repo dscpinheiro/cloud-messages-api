@@ -3,11 +3,12 @@ version: 0.2
 env:
   variables:
     BUILD_CONFIG: Release
+    ASPNETCORE_ENVIRONMENT: CI
 
 phases:
   install:
     runtime-versions:
-      dotnet: 2.2
+      dotnet: 3.0
   pre_build:
     commands:
       - echo Test started on `date`

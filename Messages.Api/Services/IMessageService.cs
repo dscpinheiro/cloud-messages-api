@@ -1,7 +1,7 @@
+﻿using Messages.Api.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Messages.Api.Models;
 
 namespace Messages.Api.Services
 {
