@@ -28,7 +28,7 @@ namespace Messages.Api
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = GetConnectionStringValue("API_DB_CONNECTION");
-            if (!HostingEnvironment.IsProduction() && string.IsNullOrWhiteSpace(connectionString))
+            if (HostingEnvironment.IsEnvironment("CI") && string.IsNullOrWhiteSpace(connectionString))
             {
                 services.AddDbContext<ApiDbContext>(options => options.UseInMemoryDatabase("InMemoryDB"));
             }
