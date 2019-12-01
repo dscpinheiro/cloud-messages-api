@@ -3,9 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages.Api", "Messages.Api\Messages.Api.csproj", "{085A0253-AE48-462C-BB94-C84998F67991}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.Api", "Messages.Api\Messages.Api.csproj", "{085A0253-AE48-462C-BB94-C84998F67991}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages.Tests", "Messages.Tests\Messages.Tests.csproj", "{0BF48F7E-D68E-41B1-B1E8-73C0FFF2C192}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.Tests", "Messages.Tests\Messages.Tests.csproj", "{0BF48F7E-D68E-41B1-B1E8-73C0FFF2C192}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21FBCE75-45F7-4DB8-9F71-D057AD8DABE6}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
