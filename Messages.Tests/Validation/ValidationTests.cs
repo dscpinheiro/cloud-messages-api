@@ -13,6 +13,7 @@ namespace Messages.Tests.Validation
     public class ValidationTests : IClassFixture<WebApplicationFactory<Startup>>, IDisposable
     {
         private readonly WebApplicationFactory<Startup> _factory;
+        private bool _isDisposed;
 
         public ValidationTests(WebApplicationFactory<Startup> factory)
         {
@@ -20,7 +21,10 @@ namespace Messages.Tests.Validation
             Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "CI");
         }
 
-        public void Dispose() => Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", null);
+        ~ValidationTests()
+        {
+            Dispose(false);
+        }
 
         [Theory, ClassData(typeof(InvalidWriteRequestData))]
         public async Task Validation_InvalidRequest_ReturnsBadRequest(string message)
@@ -42,6 +46,27 @@ namespace Messages.Tests.Validation
 
             Assert.True(response.IsSuccessStatusCode);
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool isDisposing)
+        {
+            if (_isDisposed)
+            {
+                return;
+            }
+
+            if (isDisposing)
+            {
+                Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", null);
+            }
+
+            _isDisposed = true;
         }
     }
 }
