@@ -1,4 +1,4 @@
-﻿using Messages.Api.Helpers;
+﻿using Messages.Helpers;
 using System;
 using Xunit;
 

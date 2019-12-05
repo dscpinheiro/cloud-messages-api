@@ -1,6 +1,6 @@
-﻿using Messages.Api.Helpers;
-using Messages.Api.Models;
+﻿using Messages.Api.Models;
 using Messages.Api.Services;
+using Messages.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
