@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Text;
 
-namespace Messages.Api.Helpers
+namespace Messages.Helpers
 {
     public static class StringExtensions
     {
