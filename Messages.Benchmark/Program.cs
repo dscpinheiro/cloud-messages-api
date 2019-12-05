@@ -4,7 +4,7 @@ using BenchmarkDotNet.Running;
 
 namespace Messages.Benchmark
 {
-#pragma warning disable CA1822 // Mark members as static
+    #pragma warning disable CA1822 // Mark members as static
     [MinColumn, MaxColumn]
     [MarkdownExporter, AsciiDocExporter, HtmlExporter, CsvExporter]
     public class MyBenchmark
