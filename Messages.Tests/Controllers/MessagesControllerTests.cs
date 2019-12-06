@@ -4,7 +4,6 @@ using Messages.Api.Models;
 using Messages.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 
@@ -14,6 +13,7 @@ namespace Messages.Tests.Controllers
     {
         private readonly MessagesController _controller;
         private readonly ApiDbContext _context;
+        private bool _isDisposed;
 
         private readonly List<Message> _sampleMessages = new List<Message>
         {
@@ -57,7 +57,12 @@ namespace Messages.Tests.Controllers
             _context.SaveChanges();
 
             var messagesService = new MessageService(_context);
-            _controller = new MessagesController(messagesService, NullLogger<MessagesController>.Instance);
+            _controller = new MessagesController(messagesService);
+        }
+
+        ~MessagesControllerTests()
+        {
+            Dispose(false);
         }
 
         private static DbContextOptions<ApiDbContext> CreateInMemoryOptions()
@@ -72,6 +77,25 @@ namespace Messages.Tests.Controllers
                 .Options;
         }
 
-        public void Dispose() => _context.Dispose();
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool isDisposing)
+        {
+            if (_isDisposed)
+            {
+                return;
+            }
+
+            if (isDisposing)
+            {
+                _context.Dispose();
+            }
+
+            _isDisposed = true;
+        }
     }
 }
