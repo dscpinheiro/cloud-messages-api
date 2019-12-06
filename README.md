@@ -23,7 +23,8 @@ To execute the unit tests locally, run the following commands from the root fold
 ```console
 dotnet test --logger 'console;verbosity=detailed'
 ```
-Once the container starts, you should see an output similar to this in the console.
+
+You should see an output similar to this in the console.
 
 ```console
 √ Messages.Tests.Controllers.MessagesControllerTests.Update_UnknownMessage_ReturnsNotFound [9ms]
