@@ -1,6 +1,7 @@
 **/bin/
 **/obj/
 **/codebuild/
+**/api-logs/
 
 **/.vs/
 **/.vscode/
