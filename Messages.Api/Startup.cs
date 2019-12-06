@@ -1,4 +1,4 @@
-using Messages.Api.Data;
+﻿using Messages.Api.Data;
 using Messages.Api.Filters;
 using Messages.Api.Services;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System;
 using System.IO;
 using System.Reflection;
@@ -72,6 +73,8 @@ namespace Messages.Api
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Messages API V1");
                 options.RoutePrefix = string.Empty;
             });
+
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
             app.UseAuthorization();
