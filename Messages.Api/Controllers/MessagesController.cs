@@ -15,13 +15,8 @@ namespace Messages.Api.Controllers
     public class MessagesController : ControllerBase
     {
         private readonly IMessageService _messagesService;
-        private readonly ILogger<MessagesController> _logger;
 
-        public MessagesController(IMessageService service, ILogger<MessagesController> logger)
-        {
-            _messagesService = service;
-            _logger = logger;
-        }
+        public MessagesController(IMessageService service) => _messagesService = service;
 
         /// <summary>
         /// Gets all messages, ordered alphabetically.
@@ -44,8 +39,6 @@ namespace Messages.Api.Controllers
                 return BadRequest($"{nameof(offset)} must be at least zero");
             }
 
-            _logger.LogInformation($"GET /messages LIMIT={limit} OFFSET={offset} TERM={term}");
-
             var messages = await _messagesService.GetAll(limit, offset, term);
             return messages.Select(CreateReadModel).ToList();
         }
@@ -59,8 +52,6 @@ namespace Messages.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ReadMessageResponse>> Get(Guid id)
         {
-            _logger.LogInformation($"GET /messages/:id ID={id}");
-
             var message = await _messagesService.GetById(id);
             if (message == null)
             {
@@ -79,8 +70,6 @@ namespace Messages.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post(WriteMessageRequest model)
         {
-            _logger.LogInformation($"POST /messages MESSAGE={model.Message}");
-
             var newMessage = new Message
             {
                 Value = model.Message,
@@ -102,8 +91,6 @@ namespace Messages.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Put(Guid id, WriteMessageRequest model)
         {
-            _logger.LogInformation($"PUT /messages/:id ID={id}");
-
             var existingMessage = await _messagesService.GetById(id);
             if (existingMessage == null)
             {
@@ -126,8 +113,6 @@ namespace Messages.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(Guid id)
         {
-            _logger.LogInformation($"DELETE /messages/:id ID={id}");
-
             var existingMessage = await _messagesService.GetById(id);
             if (existingMessage == null)
             {

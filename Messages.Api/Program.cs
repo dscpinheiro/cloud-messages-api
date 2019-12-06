@@ -1,8 +1,11 @@
+﻿using System;
 using Messages.Api.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
+using Serilog.Events;
 
 namespace Messages.Api
 {
@@ -10,15 +13,34 @@ namespace Messages.Api
     {
         public static void Main(string[] args)
         {
-            var webHost = CreateHostBuilder(args).Build();
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+                .MinimumLevel.Information()
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .CreateLogger();
 
-            using (var scope = webHost.Services.CreateScope())
+            try
             {
-                var context = scope.ServiceProvider.GetService<ApiDbContext>();
-                context.Database.Migrate();
-            }
+                var webHost = CreateHostBuilder(args).Build();
 
-            webHost.Run();
+                using (var scope = webHost.Services.CreateScope())
+                {
+                    var context = scope.ServiceProvider.GetService<ApiDbContext>();
+                    context.Database.Migrate();
+                }
+
+                webHost.Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");
+                throw;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -27,6 +49,7 @@ namespace Messages.Api
                 {
                     webBuilder.UseUrls("http://*:8080");
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+                .UseSerilog();
     }
 }
