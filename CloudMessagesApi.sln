@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.Tests", "Messages.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21FBCE75-45F7-4DB8-9F71-D057AD8DABE6}"
 	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
 		.editorconfig = .editorconfig
+		.gitignore = .gitignore
 		docker-compose.yml = docker-compose.yml
 		Dockerfile = Dockerfile
 		README.md = README.md
@@ -17,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.Helpers", "Messages.Helpers\Messages.Helpers.csproj", "{8535430B-92DB-4C95-9D2C-1DB6CF5F3956}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages.Benchmark", "Messages.Benchmark\Messages.Benchmark.csproj", "{AD00B0E3-C0D6-4CC5-80A3-D013AC3E1F1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.Benchmark", "Messages.Benchmark\Messages.Benchmark.csproj", "{AD00B0E3-C0D6-4CC5-80A3-D013AC3E1F1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

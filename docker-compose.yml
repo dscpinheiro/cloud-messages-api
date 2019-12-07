@@ -12,7 +12,7 @@ services:
     networks:
       - backend
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development # [Development,CI,Production]
       - API_DB_CONNECTION=Host=db;Database=mydatabase;Username=myappuser;Password=mypassword
     healthcheck:
       test: wget --quiet --tries=1 --spider http://localhost:8080/hc || exit 1
