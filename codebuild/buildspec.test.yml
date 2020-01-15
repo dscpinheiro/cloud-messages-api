@@ -16,7 +16,7 @@ phases:
   build:
     commands:
       - dotnet build -c $BUILD_CONFIG
-      - dotnet test -c $BUILD_CONFIG
+      - dotnet test -c $BUILD_CONFIG --logger 'console;verbosity=detailed'
   post_build:
     commands:
       - echo Test completed on `date`
