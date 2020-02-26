@@ -6,9 +6,9 @@ labels: needs-triage
 
 ## :question: General Issue
 
-### The Question
+### The question
 
 ### Environment
-  - **dotnet info:** <!-- Output of `dotnet --info` -->
+  - **dotnet --info:** <!-- Output of `dotnet info command` -->
 
 ### Other information

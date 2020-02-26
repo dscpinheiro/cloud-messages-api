@@ -4,9 +4,9 @@ about: Request a new feature
 labels: feature-request, needs-triage
 ---
 
-### Use Case
+### Use case
 
-### Proposed Solution
+### Proposed solution
 
 ### Other information
 

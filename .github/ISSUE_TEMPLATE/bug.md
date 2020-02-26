@@ -4,12 +4,12 @@ about: Report a bug
 labels: bug, needs-triage
 ---
 
-### Reproduction Steps
+### Reproduction steps
 
-### Error Log
+### Error log
 
 ### Environment
-  - **dotnet info:** <!-- Output of `dotnet --info` -->
+  - **dotnet --info:** <!-- Output of `dotnet info command` -->
 
 ### Other information
 
