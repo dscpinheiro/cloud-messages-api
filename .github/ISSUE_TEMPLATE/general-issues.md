@@ -1,7 +1,7 @@
 ---
 name: "\U00002753 General Issue"
 about: Create a new issue
-labels: needs-triage
+labels: needs-triage, question
 ---
 
 ## :question: General Issue

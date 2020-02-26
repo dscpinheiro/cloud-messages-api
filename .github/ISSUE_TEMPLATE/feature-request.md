@@ -1,7 +1,7 @@
 ---
 name: "\U0001F680 Feature Request"
 about: Request a new feature
-labels: feature-request, needs-triage
+labels: enhancement, needs-triage
 ---
 
 ### Use case
