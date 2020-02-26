@@ -15,4 +15,4 @@ labels: bug, needs-triage
 
 ---
 
-This is :bug: Bug Report
+This is a :bug: Bug Report
