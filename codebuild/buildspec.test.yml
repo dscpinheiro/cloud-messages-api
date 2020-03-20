@@ -9,6 +9,8 @@ phases:
   install:
     runtime-versions:
       dotnet: 3.1
+    commands:
+      - dotnet tool install -g trx2junit
   pre_build:
     commands:
       - echo Test started on `date`
@@ -16,7 +18,13 @@ phases:
   build:
     commands:
       - dotnet build -c $BUILD_CONFIG
-      - dotnet test -c $BUILD_CONFIG --logger 'console;verbosity=detailed'
+      - dotnet test -c $BUILD_CONFIG --logger trx --results-directory ./testresults
   post_build:
     commands:
+      - ~/.dotnet/tools/trx2junit ./testresults/*
       - echo Test completed on `date`
+reports:
+  TestResults:
+    files:
+      - '**/*'
+    base-directory: './testresults'
