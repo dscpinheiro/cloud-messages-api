@@ -8,3 +8,8 @@ phases:
     commands:
       - cd Messages.Benchmark
       - dotnet run -c Release
+artifacts:
+  files:
+    - '**/*'
+  base-directory: './Messages.Benchmark/BenchmarkDotNet.Artifacts/results'
+  name: benchmark-$(date +%Y-%m-%d)

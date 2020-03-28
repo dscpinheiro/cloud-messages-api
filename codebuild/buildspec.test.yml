@@ -9,6 +9,8 @@ phases:
   install:
     runtime-versions:
       dotnet: 3.1
+    commands:
+      - dotnet --info
   pre_build:
     commands:
       - echo Test started on `date`

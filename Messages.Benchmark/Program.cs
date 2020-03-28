@@ -1,12 +1,15 @@
 ﻿using Messages.Helpers;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Jobs;
+using BenchmarkDotNet.Mathematics;
 
 namespace Messages.Benchmark
 {
     #pragma warning disable CA1822 // Mark members as static
     [MinColumn, MaxColumn]
-    [MarkdownExporter, AsciiDocExporter, HtmlExporter, CsvExporter]
+    [MarkdownExporter, HtmlExporter, CsvExporter]
     public class MyBenchmark
     {
         [Benchmark]
@@ -39,7 +42,8 @@ namespace Messages.Benchmark
     {
         static void Main()
         {
-            BenchmarkRunner.Run<MyBenchmark>();
+            var config = DefaultConfig.Instance.With(Job.Default.WithOutlierMode(OutlierMode.DontRemove));
+            BenchmarkRunner.Run<MyBenchmark>(config);
         }
     }
 }
