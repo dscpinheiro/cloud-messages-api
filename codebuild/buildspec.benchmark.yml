@@ -10,6 +10,6 @@ phases:
       - dotnet run -c Release
 artifacts:
   files:
-    - $CODEBUILD_SRC_DIR/Messages.Benchmark/BenchmarkDotNet.Artifacts/results
+    - Messages.Benchmark/BenchmarkDotNet.Artifacts/results/*
   discard-paths: yes
-  name: benchmark-$(date +%Y-%m-%d)
+  name: benchmark-$(date -u +%Y-%m-%d_%H-%M-%S)
