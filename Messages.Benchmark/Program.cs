@@ -3,7 +3,7 @@ using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
-using BenchmarkDotNet.Mathematics;
+using Perfolizer.Mathematics.OutlierDetection;
 
 namespace Messages.Benchmark
 {
@@ -42,7 +42,9 @@ namespace Messages.Benchmark
     {
         static void Main()
         {
-            var config = DefaultConfig.Instance.With(Job.Default.WithOutlierMode(OutlierMode.DontRemove));
+            var job = Job.Default.WithOutlierMode(OutlierMode.DontRemove);
+            var config = DefaultConfig.Instance.AddJob(job);
+
             BenchmarkRunner.Run<MyBenchmark>(config);
         }
     }
