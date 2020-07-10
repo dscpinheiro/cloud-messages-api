@@ -6,7 +6,7 @@ updates:
     interval: weekly
     time: "11:00"
   open-pull-requests-limit: 10
-  target-branch: master
+  target-branch: main
   reviewers:
   - dscpinheiro
 - package-ecosystem: docker
@@ -15,6 +15,6 @@ updates:
     interval: weekly
     time: "11:00"
   open-pull-requests-limit: 10
-  target-branch: master
+  target-branch: main
   reviewers:
   - dscpinheiro
