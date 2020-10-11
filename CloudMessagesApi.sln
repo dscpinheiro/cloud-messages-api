@@ -9,14 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.Tests", "Messages.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21FBCE75-45F7-4DB8-9F71-D057AD8DABE6}"
 	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
-		codebuild\buildspec.benchmark.yml = codebuild\buildspec.benchmark.yml
-		codebuild\buildspec.ecr.yml = codebuild\buildspec.ecr.yml
-		codebuild\buildspec.test.yml = codebuild\buildspec.test.yml
-		docker-compose.yml = docker-compose.yml
-		Dockerfile = Dockerfile
 		global.json = global.json
 		README.md = README.md
 	EndProjectSection
@@ -24,6 +18,27 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.Helpers", "Messages.Helpers\Messages.Helpers.csproj", "{8535430B-92DB-4C95-9D2C-1DB6CF5F3956}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages.Benchmark", "Messages.Benchmark\Messages.Benchmark.csproj", "{AD00B0E3-C0D6-4CC5-80A3-D013AC3E1F1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeBuild", "CodeBuild", "{C41084E8-8905-4A31-BC5F-FBE77A19442D}"
+	ProjectSection(SolutionItems) = preProject
+		codebuild\buildspec.benchmark.yml = codebuild\buildspec.benchmark.yml
+		codebuild\buildspec.ecr.yml = codebuild\buildspec.ecr.yml
+		codebuild\buildspec.test.yml = codebuild\buildspec.test.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{6EB9F718-F669-4CD1-BECF-6A74DFE74896}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{8AA29236-9906-4A7F-9FA0-B5FD98BC8209}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
+		.github\dependabot.yml = .github\dependabot.yml
+		.github\workflows\dotnet-core.yml = .github\workflows\dotnet-core.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +65,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C41084E8-8905-4A31-BC5F-FBE77A19442D} = {21FBCE75-45F7-4DB8-9F71-D057AD8DABE6}
+		{6EB9F718-F669-4CD1-BECF-6A74DFE74896} = {21FBCE75-45F7-4DB8-9F71-D057AD8DABE6}
+		{8AA29236-9906-4A7F-9FA0-B5FD98BC8209} = {21FBCE75-45F7-4DB8-9F71-D057AD8DABE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B7FD81E4-6E96-4963-93BB-2228A4ADC19E}
