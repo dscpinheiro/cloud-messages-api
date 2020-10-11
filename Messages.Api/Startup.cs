@@ -90,7 +90,7 @@ namespace Messages.Api
         private string GetConnectionStringValue(string key)
         {
             /* Postgres can be run locally in Docker via:
-             * docker run --name pg-docker -e POSTGRES_PASSWORD=notthepassword -p 5432:5432 postgres:12-alpine
+             * docker run --name pg-docker -e POSTGRES_PASSWORD=notthepassword -p 5432:5432 postgres:13-alpine
              */
 
             var connectionString = Environment.GetEnvironmentVariable(key);
