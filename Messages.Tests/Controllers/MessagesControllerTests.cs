@@ -34,6 +34,24 @@ namespace Messages.Tests.Controllers
                 Id = Guid.Parse("118d9937-46c5-4d9c-b027-43840be00224"),
                 Value = "Norma is as selfless as I am, Ron.",
                 IsPalindrome = true
+            },
+            new Message
+            {
+                Id = Guid.Parse("d497d810-eab8-4c61-a0fc-62f3f679bb97"),
+                Value = "Noël a trop par rapport à Léon",
+                IsPalindrome = true
+            },
+            new Message
+            {
+                Id = Guid.Parse("7dc21730-62f2-4462-81ed-d6e36ee1daec"),
+                Value = "Te pék, láttál képet?",
+                IsPalindrome = true
+            },
+            new Message
+            {
+                Id = Guid.Parse("d7c14bf3-5d4f-4d20-aaef-460896010641"),
+                Value = "Eh ! ça va la vache",
+                IsPalindrome = true
             }
         };
 

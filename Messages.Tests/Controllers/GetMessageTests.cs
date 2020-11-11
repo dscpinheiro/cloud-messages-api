@@ -103,10 +103,14 @@ namespace Messages.Tests.Controllers
             Assert.NotEmpty(filteredMessages);
         }
 
-        [Fact]
-        public async Task Get_MessagesWithDifferentCaseTerm_ReturnsOk()
+        [Theory]
+        [InlineData("pAlINdroMe")]
+        [InlineData("NoëL")]
+        [InlineData("PÉK")]
+        [InlineData("çA VA")]
+        public async Task Get_MessagesWithDifferentCaseTerm_ReturnsOk(string term)
         {
-            var actionResult = await _controller.Get(term: "pAlINdroMe");
+            var actionResult = await _controller.Get(term: term);
             var filteredMessages = actionResult.Value;
 
             Assert.NotEmpty(filteredMessages);

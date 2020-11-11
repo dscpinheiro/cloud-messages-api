@@ -32,7 +32,7 @@ namespace Messages.Api.Services
             var query = _context.Messages.AsQueryable();
             if (!string.IsNullOrWhiteSpace(term))
             {
-                query = query.Where(m => EF.Functions.ILike(m.Value, $"%{term}%"));
+                query = query.Where(m => m.Value.ToLower().Contains(term.ToLower()));
             }
 
             query = query.OrderBy(m => m.Value).Skip(offset).Take(limit);
