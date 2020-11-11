@@ -7,20 +7,23 @@ dotnet run -c RELEASE
 Sample output:
 
 ``` ini
-BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18363
-Intel Core i7-8700 CPU 3.20GHz (Coffee Lake), 1 CPU, 12 logical and 6 physical cores
-.NET Core SDK=3.1.100
-  [Host]     : .NET Core 3.1.0 (CoreCLR 4.700.19.56402, CoreFX 4.700.19.56404), X64 RyuJIT
-  DefaultJob : .NET Core 3.1.0 (CoreCLR 4.700.19.56402, CoreFX 4.700.19.56404), X64 RyuJIT
+BenchmarkDotNet=v0.12.1, OS=debian 10 (container)
+Intel Xeon Platinum 8275CL CPU 3.00GHz, 1 CPU, 2 logical cores and 1 physical core
+.NET Core SDK=5.0.100
+  [Host]     : .NET Core 5.0.0 (CoreCLR 5.0.20.51904, CoreFX 5.0.20.51904), X64 RyuJIT
+  Job-KJMHHB : .NET Core 5.0.0 (CoreCLR 5.0.20.51904, CoreFX 5.0.20.51904), X64 RyuJIT
+
+OutlierMode=DontRemove  
 ```
 
 |                      Method |        Mean |     Error |    StdDev |         Min |         Max |
 |---------------------------- |------------:|----------:|----------:|------------:|------------:|
-|         ShortPalindromeWord |   217.83 ns |  0.447 ns |  0.373 ns |   217.17 ns |   218.49 ns |
-|         ShortPalindromeName |   160.66 ns |  0.685 ns |  0.572 ns |   159.42 ns |   161.48 ns |
-|             SingleCharacter |    31.95 ns |  0.980 ns |  0.917 ns |    31.26 ns |    34.41 ns |
-|   SequenceOfRepeatedNumbers |   604.97 ns |  0.828 ns |  0.734 ns |   603.75 ns |   606.09 ns |
-|     SequenceOfRandomNumbers |   154.44 ns |  2.979 ns |  3.060 ns |   151.69 ns |   161.46 ns |
-|    EnglishPalindromeMessage |   967.92 ns |  1.960 ns |  1.737 ns |   965.22 ns |   971.33 ns |
-| NonEnglishPalindromeMessage | 1,074.07 ns | 14.342 ns | 13.416 ns | 1,061.41 ns | 1,101.51 ns |
-|        NonPalindromeMessage |   195.86 ns |  3.789 ns |  4.364 ns |   190.83 ns |   203.59 ns |
+|         ShortPalindromeWord |   244.52 ns |  4.777 ns |  5.686 ns |   240.24 ns |   267.88 ns |
+|         ShortPalindromeName |   188.54 ns |  3.652 ns |  3.907 ns |   184.81 ns |   201.41 ns |
+|             SingleCharacter |    62.78 ns |  1.200 ns |  1.179 ns |    59.91 ns |    65.09 ns |
+|   SequenceOfRepeatedNumbers |   651.88 ns | 12.646 ns | 13.531 ns |   639.45 ns |   703.58 ns |
+|     SequenceOfRandomNumbers |   203.00 ns |  0.619 ns |  0.579 ns |   201.78 ns |   203.67 ns |
+|    EnglishPalindromeMessage | 1,020.91 ns |  4.946 ns |  4.627 ns | 1,013.96 ns | 1,033.01 ns |
+| NonEnglishPalindromeMessage | 1,117.72 ns |  6.373 ns |  5.961 ns | 1,109.73 ns | 1,133.79 ns |
+|        NonPalindromeMessage |   264.55 ns |  1.863 ns |  1.743 ns |   261.85 ns |   268.27 ns |
+
