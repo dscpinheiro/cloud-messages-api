@@ -42,9 +42,7 @@ namespace Messages.Benchmark
     {
         static void Main()
         {
-            var job = Job.Default.WithOutlierMode(OutlierMode.DontRemove);
-            var config = DefaultConfig.Instance.AddJob(job);
-
+            var config = DefaultConfig.Instance.AddJob(Job.Default);
             BenchmarkRunner.Run<MyBenchmark>(config);
         }
     }
