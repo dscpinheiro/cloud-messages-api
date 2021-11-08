@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine3.12 AS builder
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS builder
 WORKDIR /src
 
 # Copy csproj and restore as distinct layers
@@ -16,7 +16,7 @@ WORKDIR /src/Messages.Api
 RUN dotnet publish --configuration Release --output artifacts
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine3.12 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine AS runtime
 WORKDIR /app
 
 # Workaround for the fact that the alpine image does not have any cultures: https://github.com/dotnet/dotnet-docker/issues/533
