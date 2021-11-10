@@ -1,16 +1,9 @@
 ﻿using Messages.Api.Data;
 using Messages.Api.Filters;
 using Messages.Api.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using System;
-using System.IO;
 using System.Reflection;
 
 namespace Messages.Api

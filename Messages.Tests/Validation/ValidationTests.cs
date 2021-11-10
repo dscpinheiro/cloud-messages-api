@@ -1,10 +1,7 @@
 ﻿using Messages.Api;
 using Messages.Api.Models;
 using Microsoft.AspNetCore.Mvc.Testing;
-using System;
 using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Messages.Tests.Validation

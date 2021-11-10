@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using System;
 
 namespace Messages.Api.Models
 {

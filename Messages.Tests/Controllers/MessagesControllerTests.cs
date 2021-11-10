@@ -4,8 +4,6 @@ using Messages.Api.Models;
 using Messages.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 
 namespace Messages.Tests.Controllers
 {

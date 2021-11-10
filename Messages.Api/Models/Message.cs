@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Messages.Api.Models
+﻿namespace Messages.Api.Models
 {
     public class Message
     {

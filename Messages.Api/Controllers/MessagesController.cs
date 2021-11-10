@@ -1,12 +1,7 @@
 ﻿using Messages.Api.Models;
 using Messages.Api.Services;
 using Messages.Helpers;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Messages.Api.Controllers
 {

@@ -1,5 +1,4 @@
 ﻿using Messages.Helpers;
-using System;
 using Xunit;
 
 namespace Messages.Tests.Helpers
