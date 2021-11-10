@@ -120,7 +120,7 @@ namespace Messages.Api.Controllers
         /// <summary>
         /// Maps the message entity (which is saved to the database) to a model returned to clients.
         /// </summary>
-        private ReadMessageResponse CreateReadModel(Message message) => new ReadMessageResponse
+        private ReadMessageResponse CreateReadModel(Message message) => new()
         {
             Id = message.Id,
             Message = message.Value,
