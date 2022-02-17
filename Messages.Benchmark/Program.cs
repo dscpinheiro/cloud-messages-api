@@ -3,12 +3,12 @@ using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
-using Perfolizer.Mathematics.OutlierDetection;
 
 namespace Messages.Benchmark
 {
-    #pragma warning disable CA1822 // Mark members as static
+#pragma warning disable CA1822 // Mark members as static
     [MinColumn, MaxColumn]
+    [MemoryDiagnoser, ThreadingDiagnoser]
     [MarkdownExporter, HtmlExporter, CsvExporter]
     public class MyBenchmark
     {
