@@ -8,6 +8,7 @@ using Perfolizer.Mathematics.OutlierDetection;
 namespace Messages.Benchmark
 {
     #pragma warning disable CA1822 // Mark members as static
+    [MemoryDiagnoser]
     [MinColumn, MaxColumn]
     [MarkdownExporter, HtmlExporter, CsvExporter]
     public class MyBenchmark

@@ -14,7 +14,7 @@ public static class StringExtensions
         }
 
         // Filter the message to include only letters and numbers
-        var stringBuilder = new StringBuilder();
+        var stringBuilder = new StringBuilder(message.Length);
         foreach (var letter in message)
         {
             if (char.IsLetterOrDigit(letter))
