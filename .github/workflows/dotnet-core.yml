@@ -22,6 +22,9 @@ jobs:
       - name: Test
         run: dotnet test --configuration Release --no-restore --verbosity normal
 
+      - name: Check temp directory
+        run: echo $RUNNER_TEMP
+
       - name: List packages
         run: dotnet list package > "$RUNNER_TEMP/dependencies.txt"
       - name: Upload artifacts
