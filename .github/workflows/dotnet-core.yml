@@ -20,3 +20,5 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       - name: Test
         run: dotnet test --configuration Release --no-restore --verbosity normal
+      - name: Check temp directory
+        run: echo $RUNNER_TEMP
